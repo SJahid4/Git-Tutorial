@@ -16,3 +16,9 @@ system.debug(lstac);
 String Cron = '0 0 6 * * ? *';
 ScheduleApex_UsingCRON schedulingap = new ScheduleApex_UsingCRON();
 system.schedule('Scheduling From VS CODE Editor', cron,schedulingap);
+
+NewTestDemoBatchClass1 newww = new NewTestDemoBatchClass1();
+String JobId = Database.executeBatch(newww,10);
+system.debug(JobId);
+
+TestDebugger.TestDebuggermethod();
