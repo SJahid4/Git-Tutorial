@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="password" type="String" />
+    <lightning:card title="Test Page to Dispaly based on User Context" >
+    	<lightning:input label="UserName" value="{!v.name}" />
+        <lightning:input label="" value="{!v.password}" type="Password" />
+        <lightning:button label="Submit" onclick="{!c.call}" />
+    </lightning:card>
+</aura:component>

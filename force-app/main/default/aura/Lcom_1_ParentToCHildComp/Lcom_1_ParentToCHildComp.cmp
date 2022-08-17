@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="accName" type="String" default="Parent" />
+    {!v.accName}
+    <c:Lcom_1_ParentToCHildComp_CHILD accnameHere="{!v.accName}" />
+</aura:component>

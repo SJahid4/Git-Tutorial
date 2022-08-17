@@ -1,4 +1,4 @@
-Global with sharing class BatchApex2ToUpdtAccNSendFaildRecEmail implements Database.Batchable<sObject>, Database.stateful, Schedulable 
+Global with sharing class BatchApex2ToUpdtAccNSendFaildRecEmail implements Database.Batchable<sObject>, Database.stateful 
 {
     Global BatchApex2ToUpdtAccNSendFaildRecEmail()
     {}
@@ -25,7 +25,7 @@ Global with sharing class BatchApex2ToUpdtAccNSendFaildRecEmail implements Datab
                     acc.name = null;
                 }
                 acc.description = 'NEW-NEW-new -new --- This has been Updated due to the following Batch BatchApexNew2ToUpdateAccNSendEmailwithFailedRec';
-                acc.annualrevenue =30;
+                acc.annualrevenue =3000;
                 UpdateAccounts.add(acc);
                 for(contact con : acc.contacts)
                 {
@@ -109,10 +109,11 @@ Global with sharing class BatchApex2ToUpdtAccNSendFaildRecEmail implements Datab
     
            Messaging.SendEmail(new Messaging.SingleEmailMessage[]{email});
        
-    }
+    }/*
     global void execute(SchedulableContext sContext)
     {
         String CronExpression = '0 0 0 * * ? *';
         system.schedule('Scheduling Updates account batch', CronExpression,new BatchApex2ToUpdtAccNSendFaildRecEmail());
-    }
+    } */
+    
 }

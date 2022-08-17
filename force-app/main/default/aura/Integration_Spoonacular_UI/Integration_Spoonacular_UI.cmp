@@ -1,0 +1,7 @@
+<aura:component controller="Integration_Spoonacular">
+	<lightning:card title="" iconName="standard:Account">
+    	<lightning:layout multipleRows="true">
+            <lightning:button label="" />
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

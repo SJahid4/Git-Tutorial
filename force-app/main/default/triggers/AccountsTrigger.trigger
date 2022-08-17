@@ -13,9 +13,9 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
     //Object : ACCOUNT.
     //Operation : INSERT.
     //Event : After
-	
+    
     //SCENARIO -4 : When user updates Account Record, if user changes account name, throw an error "Account name once created cannot be modified"
-	//Object : ACCOUNT.
+    //Object : ACCOUNT.
     //Operation : UPDATE.
     //Event : Before
     
@@ -30,7 +30,7 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
     //Operation : Delete
     //Event : Before
     
-	//SCENARIO - 7 : Send an Email Notificatin to the owner after Deleting an ACCOUNT RECORD.
+    //SCENARIO - 7 : Send an Email Notificatin to the owner after Deleting an ACCOUNT RECORD.
     //Object : Account
     //Operation : Delete
     //Event : AFTER
@@ -45,11 +45,11 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
         //PrePopulate Shipping Address from BIlling Address
         AccountsTriggerHandler.beforeInsertHandler(Trigger.New);
     }
-	
+    
     If(Trigger.isAfter && Trigger.isInsert)
         {
-            //SCENARIO -- 3	
-			AccountsTriggerHandler.afterInsertCreateContact(Trigger.New);	            
+            //SCENARIO -- 3 
+            AccountsTriggerHandler.afterInsertCreateContact(Trigger.New);               
         }
     
     If(Trigger.isBefore && Trigger.isUpdate)
@@ -70,7 +70,7 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
         //Verifying using MapCollections
         AccountsTriggerHandler.toCheckAccNameGotChangedOrNOT(Trigger.New,Trigger.OldMap);
       }
-	//AFTER UPDATE LOGIC TO BE WRITTEN IN THIS BELOW BLOCK..
+    //AFTER UPDATE LOGIC TO BE WRITTEN IN THIS BELOW BLOCK..
     if(Trigger.isAfter && Trigger.isUpdate)
     {
         //SCENARIO -- 5
@@ -79,7 +79,7 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
             if(accRecNew.BillingStreet != Trigger.oldMap.get(accRecNew.Id).BillingStreet || accRecNew.BillingCity != Trigger.OldMap.get(accRecNew.Id).BillingCity)
             {
                 list<account> lstacc = [select id,BillingStreet, BillingCity,BillingState,BillingCountry,BillingPostalCode, (select id,Mailingstreet,MailingCity,MailingCountry,MailingState,MailingPostalCode from contacts) from account where id IN : Trigger.NewMap.keySet()];
-				list<contact> contactsToUpdate = new List<contact>();
+                list<contact> contactsToUpdate = new List<contact>();
                 IF(lstacc.size() >0)
                 {
                     for(account acc : lstacc)
@@ -92,7 +92,7 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
                             con.MailingCountry = acc.BillingCountry;
                             con.MailingPostalCode = acc.BillingPostalCode;
                             con.MailingState = acc.BillingState;
-                            contactsToUpdate.add(con);	                            
+                            contactsToUpdate.add(con);                              
                         }
                     }
                     if(contactsToUpdate.size() >0)
@@ -166,6 +166,22 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
             Messaging.sendEmail(email);
         }
     }
+    //Prevent Deletion of account if it has childs
+    if(trigger.isBefore && Trigger.isDelete)
+    {
+        for(Account ac : Trigger.Old)
+        {
+            list<contact> lstcon = [select id,accountid from contact where accountId IN : Trigger.OldMap.Keyset()];
+            if(lstcon != null)
+            {
+                for(contact con : lstcon)
+                {
+                    con.addError('You are not Authorized to Delete if you have Child Contacts');
+                }
+            }
+        }
+    }
+    
     /*
     //reference -- SFDC panther+ channel test class video   
     if(Trigger.isDelete && Trigger.isBefore)
@@ -265,4 +281,5 @@ trigger AccountsTrigger on Account(Before Insert, After Insert, Before Update, A
             }
         }
     } */
+    
 }

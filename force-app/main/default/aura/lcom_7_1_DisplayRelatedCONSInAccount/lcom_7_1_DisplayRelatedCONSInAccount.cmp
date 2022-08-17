@@ -1,0 +1,26 @@
+<aura:component implements="flexiPage:availableForRecordHome,force:hasRecordId" access="global" controller="lcom_7_1_DisplayRelatedCONSInAccount">
+    
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="flag" type="Boolean" default="false"/>
+    <aura:attribute name="conList" type="Contact[]" />
+    <aura:attribute name="columns" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.call}"/>
+    <aura:attribute name="UpdatedList" type="Contact[]" />
+
+    <lightning:card title="Related Child Contacts" iconName="standard:contact">
+			
+        <aura:if isTrue="{!not(empty(v.conList))}">
+				<lightning:datatable
+                keyField="id"
+                data="{! v.conList }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"
+				draftValues="{!v.UpdatedList}"
+				onsave="{!c.SaveUpdatedContacts}"/>
+            
+            <aura:set attribute="else">
+                <b><center>"There are No Related Child Contacts for this Account"</center></b>
+            </aura:set>
+        </aura:if>   
+    </lightning:card>
+</aura:component>

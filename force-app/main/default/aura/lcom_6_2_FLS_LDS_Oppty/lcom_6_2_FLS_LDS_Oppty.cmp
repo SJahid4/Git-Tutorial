@@ -1,0 +1,10 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="lcom_6_2_Oppty">
+    <aura:attribute name="Opp" type="Opportunity" />
+    <aura:attribute name="Amount" type="Integer" />
+    <aura:handler name="init" value="{!this}" action="{!c.call}" />
+    <lightning:card title="Update Opportunity" iconName="standard:opportunity">
+        Opportunity Name : <b>{!v.Opp.Name}</b>
+        <lightning:input label="Amount Of Oppty" value="{!v.Amount}" /><br/>
+        <center><lightning:button label="Update" onclick="{!c.Update}" /></center>
+    </lightning:card>
+</aura:component>

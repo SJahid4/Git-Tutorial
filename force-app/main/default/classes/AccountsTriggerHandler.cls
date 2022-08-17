@@ -1,4 +1,4 @@
-public class AccountsTriggerHandler 
+public with sharing class AccountsTriggerHandler 
 {
     public static void beforeInsertHandler(list<account> newRecords)
     {
@@ -126,4 +126,14 @@ public class AccountsTriggerHandler
 
     }
 */
+    public static void methodd()
+    {
+        system.debug(userinfo.getUserName());
+        system.debug(userInfo.getFirstName());
+        system.debug(userInfo.getLanguage());
+        system.debug(userInfo.getLastName());
+        system.debug(userInfo.getOrganizationId());
+        system.debug(userInfo.getProfileId());
+        system.debug(userInfo.getUserName());
+    }
 }

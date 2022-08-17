@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="lcom_6_retrieveAccountsClass">
+    <aura:attribute name="acc" type="Account" />
+    <aura:handler name="init" value="{!this}" action="{!c.call}" />
+    <lightning:card title="Update Account" iconName="standard:account" >
+        <lightning:input label="Industry" value="{!v.acc.Rating}" />
+        <lightning:button label="Update" onclick="{!c.update}" />
+    </lightning:card>
+</aura:component>
