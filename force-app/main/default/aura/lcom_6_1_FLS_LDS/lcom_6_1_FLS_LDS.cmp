@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableforAllPageTypes,force:AppHostable" access="global" controller="lcom_6_retrieveAccountsClass">
+    <aura:attribute name="flag" type="Boolean" default="false" />
+    <aura:attribute name="acc" type="Account" />
+    <aura:attribute name="fields" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.loadTable}" />
+    <lightning:layout >
+    	<lightning:layoutItem size="12">
+            <lightning:card title="Account Security Info" iconName="standard:account" />
+        </lightning:layoutItem>  <br/>
+    </lightning:layout>
+    <lightning:card title="List Of Accounts" iconName="standard:account">
+    	<lightning:layout multipleRows="true">
+        	<lightning:layoutItem size="12">
+                <!--<lightning:recordEditForm objectApiName="Account" recordId="{!v.recordId}">
+                    <lightning:inputField fieldName="Rating" />
+                    <lightning:inputField fieldName="Industry" />
+                </lightning:recordEditForm> -->
+                <aura:if isTrue="{!v.flag}" >
+            	    <lightning:datatable keyField="Id" hideCheckboxColumn="true" data="{!v.acc}" columns="{!v.fields}" />
+            	</aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

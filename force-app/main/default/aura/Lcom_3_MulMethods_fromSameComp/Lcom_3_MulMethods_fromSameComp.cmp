@@ -1,0 +1,8 @@
+<aura:component controller="ToTestMultipleMethodsCanbeCalledorNot">
+    <lightning:card title="My pageBlock" >
+        <lightning:button label="ClickMe" onclick="{!c.callme}" />
+
+        <lightning:button label="toast" onclick="{!c.toast}" />
+        debugger;
+    </lightning:card>
+</aura:component>

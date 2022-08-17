@@ -1,0 +1,6 @@
+<aura:component>
+    <aura:attribute name="name" type="String" default="Fuck you blady"/>    
+    <lightning:card title="something">
+    <lightning:button label="Fusk" variant="destructive" onclick="{!c.call}"/>
+    </lightning:card>
+</aura:component>

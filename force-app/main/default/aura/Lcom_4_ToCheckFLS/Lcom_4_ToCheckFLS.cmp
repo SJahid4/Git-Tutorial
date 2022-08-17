@@ -1,0 +1,23 @@
+<aura:component controller="ToCheckFLS">
+    
+    <aura:attribute name="acc" type="Account[]" />
+	<lightning:card title="Accounts Page" >
+        <lightning:button label="Search" onclick="{!c.call}" />
+        
+        	<lightning:layout multipleRows="true">
+                <aura:iteration items="{!v.acc}" var="a" >
+            	<lightning:layoutItem size="3">
+                    Name - {!a.Name} <br/>
+                    Rating - {!a.Rating} <br/>
+                    Phone - {!a.Phone} <br/>
+                    Industry - {!a.Industry} <br/>
+                    Active__c - {!a.Active__c} <br/>
+                    Annualrevenue - {!a.Annualrevenue} <br/>
+                    ID - {!a.Id} <br/><br/><br/>
+                    </lightning:layoutItem> <br/> 
+                     </aura:iteration>
+            </lightning:layout>
+            
+       
+    </lightning:card>
+</aura:component>

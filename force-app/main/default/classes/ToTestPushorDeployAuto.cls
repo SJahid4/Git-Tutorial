@@ -4,4 +4,4 @@ public with sharing class ToTestPushorDeployAuto {
         system.debug(txt);
         return txt;
     }
-} 
+}
